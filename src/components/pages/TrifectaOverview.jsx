@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { getTrifectaSections } from "@/services/api/trifectaService";
+import ApperIcon from "@/components/ApperIcon";
 import TrifectaTriangle from "@/components/organisms/TrifectaTriangle";
 import SectionDetailPanel from "@/components/molecules/SectionDetailPanel";
 import MetricCard from "@/components/molecules/MetricCard";
-import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
-import { getTrifectaSections } from "@/services/api/trifectaService";
-import ApperIcon from "@/components/ApperIcon";
+import Loading from "@/components/ui/Loading";
 
 const TrifectaOverview = () => {
   const [sections, setSections] = useState([]);
@@ -90,8 +90,60 @@ const TrifectaOverview = () => {
           <MetricCard key={index} metric={metric} index={index} />
         ))}
       </motion.div>
+</motion.div>
 
-      {/* Triangle Visualization */}
+      {/* Status Widget */}
+      <motion.div 
+        className="bg-gradient-to-br from-white to-surface-50 rounded-xl p-6 border border-surface-200 shadow-sm"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        <div className="space-y-4">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center">
+              <ApperIcon name="Shield" className="w-4 h-4 text-white" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800">Setup Status Overview</h3>
+              <p className="text-sm text-gray-600">Critical business structure completion indicators</p>
+            </div>
+          </div>
+          
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {(sections || []).map((section, index) => (
+              <motion.div
+key={section.id}
+                className="flex items-start space-x-3 p-3 rounded-lg bg-white border border-surface-100 hover:border-surface-200 transition-colors"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 + index * 0.05 }}
+              >
+                <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
+                  section.status === 'completed' 
+                    ? 'bg-green-100 text-green-600' 
+                    : 'bg-gray-100 text-gray-400'
+                }`}>
+                  <ApperIcon 
+                    name={section.status === 'completed' ? "Check" : "X"} 
+                    className="w-3 h-3" 
+                  />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className={`text-sm font-medium ${
+                    section.status === 'completed' ? 'text-gray-800' : 'text-gray-500'
+                  }`}>
+                    {section.name}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+                    {section.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
       <motion.div 
         className="flex flex-col items-center space-y-8 py-8"
         initial={{ opacity: 0, scale: 0.9 }}

@@ -49,9 +49,23 @@ export const deleteTrifectaSection = async (id) => {
   if (sectionIndex === -1) {
     throw new Error("Section not found");
   }
+}
   
   const deletedSection = { ...trifectaSectionsData[sectionIndex] };
   trifectaSectionsData.splice(sectionIndex, 1);
   
   return deletedSection;
+
+export const getOverallStatus = async () => {
+  await delay(300);
+  
+  // Mock overall business setup completion status
+  return [
+    { label: "Trust Funded", completed: true, description: "Primary trust vehicle established and funded" },
+    { label: "Estate Plan Complete", completed: true, description: "Will, trust documents, and beneficiary designations updated" },
+    { label: "Asset Protection Active", completed: true, description: "Key assets properly titled and protected" },
+{ label: "Business Structure Optimized", completed: false, description: "Corporate structure review and optimization pending" },
+    { label: "Tax Planning Current", completed: true, description: "Current year tax strategies implemented" },
+    { label: "Succession Plan Documented", completed: false, description: "Business succession planning documentation needed" }
+  ];
 };
