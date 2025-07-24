@@ -1,0 +1,137 @@
+[
+  {
+    "Id": 1,
+    "id": "foundation",
+    "name": "Foundation",
+    "description": "The cornerstone of your business structure, encompassing core systems, governance, and fundamental processes that support all operations. This includes legal framework, compliance systems, financial infrastructure, and organizational governance.",
+    "position": "base",
+    "metrics": [
+      {
+        "label": "Compliance Score",
+        "value": "94",
+        "unit": "%",
+        "trend": "up"
+      },
+      {
+        "label": "System Uptime",
+        "value": "99.8",
+        "unit": "%",
+        "trend": "stable"
+      },
+      {
+        "label": "Foundation Assets",
+        "value": "$450K",
+        "unit": "",
+        "trend": "up"
+      }
+    ],
+    "subComponents": [
+      {
+        "name": "Legal & Compliance",
+        "description": "Corporate structure, regulatory compliance, and legal framework management"
+      },
+      {
+        "name": "Financial Infrastructure",
+        "description": "Accounting systems, financial controls, and reporting mechanisms"
+      },
+      {
+        "name": "Governance Systems",
+        "description": "Board oversight, policy management, and organizational controls"
+      },
+      {
+        "name": "Technology Platform",
+        "description": "Core IT infrastructure, security systems, and data management"
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "id": "operations",
+    "name": "Operations",
+    "description": "Active business processes, day-to-day activities, and operational workflows that generate value and drive business outcomes. This encompasses production, service delivery, customer relations, and ongoing business activities.",
+    "position": "left",
+    "metrics": [
+      {
+        "label": "Active Processes",
+        "value": "12",
+        "unit": "processes",
+        "trend": "up"
+      },
+      {
+        "label": "Operational Efficiency",
+        "value": "87",
+        "unit": "%",
+        "trend": "up"
+      },
+      {
+        "label": "Monthly Revenue",
+        "value": "$125K",
+        "unit": "",
+        "trend": "up"
+      }
+    ],
+    "subComponents": [
+      {
+        "name": "Sales & Marketing",
+        "description": "Customer acquisition, brand management, and market development activities"
+      },
+      {
+        "name": "Service Delivery",
+        "description": "Product development, service fulfillment, and customer support operations"
+      },
+      {
+        "name": "Supply Chain",
+        "description": "Vendor management, procurement, and logistics coordination"
+      },
+      {
+        "name": "Human Resources",
+        "description": "Talent management, organizational development, and workforce operations"
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "id": "holdings",
+    "name": "Holdings",
+    "description": "Strategic assets, investments, and long-term value stores that comprise your business portfolio. This includes real estate, financial investments, intellectual property, and other valuable assets that appreciate over time.",
+    "position": "right",
+    "metrics": [
+      {
+        "label": "Total Holdings Value",
+        "value": "$1.8M",
+        "unit": "",
+        "trend": "up"
+      },
+      {
+        "label": "Asset Growth",
+        "value": "12.5",
+        "unit": "%",
+        "trend": "up"
+      },
+      {
+        "label": "Portfolio Diversity",
+        "value": "8",
+        "unit": "categories",
+        "trend": "stable"
+      }
+    ],
+    "subComponents": [
+      {
+        "name": "Real Estate Portfolio",
+        "description": "Commercial and residential properties, land holdings, and real estate investments"
+      },
+      {
+        "name": "Financial Investments",
+        "description": "Stocks, bonds, mutual funds, and other financial instruments"
+      },
+      {
+        "name": "Intellectual Property",
+        "description": "Patents, trademarks, copyrights, and proprietary technologies"
+      },
+      {
+        "name": "Strategic Partnerships",
+        "description": "Joint ventures, strategic alliances, and collaborative investments"
+      }
+    ]
+  }
+]
