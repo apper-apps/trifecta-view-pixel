@@ -95,7 +95,7 @@
     "name": "Holdings",
     "description": "Strategic assets, investments, and long-term value stores that comprise your business portfolio. This includes real estate, financial investments, intellectual property, and other valuable assets that appreciate over time.",
     "position": "right",
-    "metrics": [
+"metrics": [
       {
         "label": "Total Holdings Value",
         "value": "$1.8M",
@@ -113,12 +113,23 @@
         "value": "8",
         "unit": "categories",
         "trend": "stable"
+      },
+      {
+        "label": "Rental Optimization",
+        "value": "75",
+        "unit": "%",
+        "trend": "up",
+        "progress": 75,
+        "progressColor": "accent",
+        "progressLabel": "75% complete - bonus depreciation alerts ready"
       }
     ],
-    "subComponents": [
+"subComponents": [
       {
         "name": "Real Estate Portfolio",
-        "description": "Commercial and residential properties, land holdings, and real estate investments"
+        "description": "Commercial and residential properties, land holdings, and real estate investments",
+        "progress": 75,
+        "optimizationStatus": "Bonus depreciation alerts configured for rental properties"
       },
       {
         "name": "Financial Investments",

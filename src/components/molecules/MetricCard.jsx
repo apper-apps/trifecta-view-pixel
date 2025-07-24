@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Card from "@/components/atoms/Card";
 import ApperIcon from "@/components/ApperIcon";
-
+import ProgressBar from "@/components/atoms/ProgressBar";
 const MetricCard = ({ metric, index }) => {
   const getTrendColor = (trend) => {
     switch (trend) {
@@ -20,7 +20,7 @@ const MetricCard = ({ metric, index }) => {
     }
   };
 
-  return (
+return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ const MetricCard = ({ metric, index }) => {
     >
       <Card className="metric-card p-6 bg-gradient-to-br from-white to-surface-50">
         <div className="flex items-center justify-between">
-          <div className="space-y-2">
+          <div className="space-y-2 flex-1">
             <p className="text-sm font-medium text-gray-600">{metric.label}</p>
             <div className="flex items-baseline space-x-2">
               <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
@@ -36,6 +36,19 @@ const MetricCard = ({ metric, index }) => {
               </span>
               <span className="text-sm text-gray-500">{metric.unit}</span>
             </div>
+            {metric.progress !== undefined && (
+              <div className="mt-3">
+                <ProgressBar 
+                  progress={metric.progress} 
+                  size="sm" 
+                  color={metric.progressColor || "primary"}
+                  showPercentage={false}
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  {metric.progressLabel || `${metric.progress}% complete`}
+                </p>
+              </div>
+            )}
           </div>
           <div className={`flex items-center space-x-1 ${getTrendColor(metric.trend)}`}>
             <ApperIcon name={getTrendIcon(metric.trend)} className="w-4 h-4" />
