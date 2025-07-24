@@ -80,7 +80,7 @@ export const getTaxComparison = async (profit) => {
   };
   sCorps.totalTax = sCorps.federalTax + sCorps.stateTax + sCorps.payrollTax;
   
-  return {
+  const result = {
     profit,
     soleProp: soleProps,
     sCorp: sCorps,
@@ -89,6 +89,12 @@ export const getTaxComparison = async (profit) => {
       percentage: ((soleProps.totalTax - sCorps.totalTax) / soleProps.totalTax * 100).toFixed(1)
     }
   };
+  
+  // Trigger alerts for key tax strategies
+  await checkQuarterlyEstimateAlert(result);
+  await checkOpportunityZoneAlert(result);
+  
+  return result;
 };
 
 export const calculateTaxSavings = async (currentProfit, targetProfit) => {
@@ -163,4 +169,45 @@ export const getBusinessStructureRecommendation = async (profit, businessGoals =
     ...recommendation,
     taxComparison: comparison
   };
+};
+
+// Check if quarterly estimate alert should be triggered
+export const checkQuarterlyEstimateAlert = async (taxComparison) => {
+  await delay(200);
+  
+  const { profit, soleProp, sCorp } = taxComparison;
+  
+  // Trigger Q1 estimate alert for businesses with significant tax liability
+  if (profit >= 75000) {
+    const recommendedStructure = soleProp.totalTax > sCorp.totalTax ? 'S-Corporation' : 'Sole Proprietorship';
+    const quarterlyAmount = Math.round((recommendedStructure === 'S-Corporation' ? sCorp.totalTax : soleProp.totalTax) / 4);
+    
+    return {
+      shouldAlert: true,
+      message: `Consider Q1 estimated tax payments! Based on ${profit.toLocaleString()} profit, quarterly payments of $${quarterlyAmount.toLocaleString()} may help avoid underpayment penalties.`,
+      type: 'info',
+      structure: recommendedStructure
+    };
+  }
+  
+  return { shouldAlert: false };
+};
+
+// Check if Opportunity Zone deferral alert should be triggered
+export const checkOpportunityZoneAlert = async (taxComparison) => {
+  await delay(200);
+  
+  const { profit, savings } = taxComparison;
+  
+  // Trigger Opportunity Zone alert for high-earning businesses with significant savings potential
+  if (profit >= 150000 && savings.amount >= 5000) {
+    return {
+      shouldAlert: true,
+      message: `Opportunity Zone Investment Alert: With $${savings.amount.toLocaleString()} in potential tax savings, consider deferring capital gains through Opportunity Zone investments for additional tax benefits.`,
+      type: 'warning',
+      potentialSavings: savings.amount
+    };
+  }
+  
+  return { shouldAlert: false };
 };

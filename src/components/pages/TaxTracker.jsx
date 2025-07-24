@@ -17,13 +17,27 @@ const TaxTracker = () => {
   const [error, setError] = useState("");
   const [selectedScenario, setSelectedScenario] = useState("comparison");
 
-  const loadTaxData = async () => {
+const loadTaxData = async () => {
     try {
       setError("");
       setLoading(true);
       await new Promise(resolve => setTimeout(resolve, 600));
       const data = await getTaxComparison(profit);
       setTaxData(data);
+      
+      // Check for tax strategy alerts
+      const { checkQuarterlyEstimateAlert, checkOpportunityZoneAlert } = await import("@/services/api/taxService");
+      
+      const q1Alert = await checkQuarterlyEstimateAlert(data);
+      if (q1Alert.shouldAlert) {
+        toast.info(q1Alert.message, { autoClose: 8000 });
+      }
+      
+      const ozAlert = await checkOpportunityZoneAlert(data);
+      if (ozAlert.shouldAlert) {
+        toast.warning(ozAlert.message, { autoClose: 10000 });
+      }
+      
     } catch (err) {
       setError("Failed to load tax comparison data. Please try again.");
       toast.error("Error loading tax calculations");
@@ -37,9 +51,16 @@ const TaxTracker = () => {
     loadTaxData();
   }, [profit]);
 
-  const handleProfitChange = (e) => {
+const handleProfitChange = (e) => {
     const newProfit = parseInt(e.target.value);
     setProfit(newProfit);
+    
+    // Provide contextual guidance for significant profit changes
+    if (newProfit >= 100000 && profit < 100000) {
+      toast.info("💡 Consider S-Corporation election for potential tax savings at this profit level", { autoClose: 6000 });
+    } else if (newProfit >= 200000 && profit < 200000) {
+      toast.warning("🚀 High profit threshold reached - review quarterly estimates and advanced tax strategies", { autoClose: 7000 });
+    }
   };
 
   const handleScenarioSelect = (scenario) => {
