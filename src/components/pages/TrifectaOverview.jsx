@@ -85,15 +85,14 @@ const TrifectaOverview = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-      >
+>
         {summaryMetrics.map((metric, index) => (
           <MetricCard key={index} metric={metric} index={index} />
         ))}
       </motion.div>
-</motion.div>
 
       {/* Status Widget */}
-      <motion.div 
+      <motion.div
         className="bg-gradient-to-br from-white to-surface-50 rounded-xl p-6 border border-surface-200 shadow-sm"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

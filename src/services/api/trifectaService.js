@@ -49,13 +49,12 @@ export const deleteTrifectaSection = async (id) => {
   if (sectionIndex === -1) {
     throw new Error("Section not found");
   }
-}
   
   const deletedSection = { ...trifectaSectionsData[sectionIndex] };
   trifectaSectionsData.splice(sectionIndex, 1);
   
   return deletedSection;
-
+};
 export const getOverallStatus = async () => {
   await delay(300);
   
