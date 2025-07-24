@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Layout from "@/components/organisms/Layout";
 import TrifectaOverview from "@/components/pages/TrifectaOverview";
+import TaxTracker from "@/components/pages/TaxTracker";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<TrifectaOverview />} />
             <Route path="/overview" element={<TrifectaOverview />} />
+            <Route path="/tax-tracker" element={<TaxTracker />} />
           </Routes>
         </Layout>
         <ToastContainer
